@@ -519,11 +519,28 @@ class SKKEngine(
             } else {
                 commitTextSKK(regInfo.entry.append(regInfo.okurigana), 1)
             }
-        }
-        reset()
-        if (!mRegistrationStack.isEmpty()) setComposingTextSKK("", 1)
+            reset()
+            if (!mRegistrationStack.isEmpty()) setComposingTextSKK("", 1)
+            mService.onFinishRegister()
+        } else {
+            mService.onFinishRegister()
 
-        mService.onFinishRegister()
+            // 入力をキャンセルして元の状態に戻す
+            mKanjiKey.setLength(0)
+            mKanjiKey.append(regInfo.key)
+            mOkurigana = regInfo.okurigana
+
+            if (mOkurigana != null) {
+                mOkurigana = null
+                mKanjiKey.deleteCharAt(mKanjiKey.length - 1)
+            }
+            changeState(SKKKanjiState)
+            setComposingTextSKK(mKanjiKey, 1)
+            updateSuggestions(mKanjiKey.toString())
+            mCurrentCandidateIndex = 0
+            mService.requestChooseCandidate(mCurrentCandidateIndex)
+        }
+
     }
 
     internal fun cancelRegister() {
