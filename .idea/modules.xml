@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidSKK.iml" filepath="$PROJECT_DIR$/AndroidSKK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/AndroidSKK-app.iml" filepath="$PROJECT_DIR$/app/AndroidSKK-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project-AndroidSKK.iml" filepath="$PROJECT_DIR$/project-AndroidSKK.iml" />
     </modules>
   </component>
 </project>
