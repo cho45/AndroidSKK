@@ -112,12 +112,18 @@ class SKKEngine(
         return false
     }
 
+    // true を返した場合、enter をハンドリングいう扱いになる
+    // つまり改行は入力されない。
     fun handleEnter(): Boolean {
+        val eggLikeNewLine = true
         when (state) {
-            SKKChooseState, SKKNarrowingState -> pickCandidate(mCurrentCandidateIndex)
+            SKKChooseState, SKKNarrowingState -> {
+                pickCandidate(mCurrentCandidateIndex)
+            }
             SKKKanjiState, SKKOkuriganaState, SKKAbbrevState -> {
                 commitTextSKK(mKanjiKey, 1)
                 changeState(SKKHiraganaState)
+                return eggLikeNewLine
             }
             else -> {
                 if (mComposing.isEmpty()) {
@@ -129,6 +135,7 @@ class SKKEngine(
                 } else {
                     commitTextSKK(mComposing, 1)
                     mComposing.setLength(0)
+                    return eggLikeNewLine
                 }
             }
         }
